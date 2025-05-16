@@ -1,6 +1,6 @@
 # ReadySize React Native SDK
 
-Embed our 3 step sizing modal into any React Native **or Expo** app so your shoppers always pick the perfect fit.
+Embed our 3‑step sizing modal into any React Native **or Expo** app so your shoppers always pick the perfect fit.
 
 ---
 
@@ -23,16 +23,16 @@ Embed our 3 step sizing modal into any React Native **or Expo** app so your shop
 
 ## Features
 
-- **Drop in sizing modal** — covers the screen and returns the recommended size.
-- **Locale aware** — ships with _es ES, pt PT, en US, fr FR, de DE, nl NL_ and falls back to English.
-- **TypeScript first** — full typings for every public API.
-- **Pure JS** — _no native modules_, so no Cocoapods or Gradle edits 🎉.
+- **Drop‑in sizing modal** — covers the screen and returns the recommended size.
+- **Locale‑aware** — ships with _es‑ES, pt‑PT, en‑US, fr‑FR, de‑DE, nl‑NL_ and falls back to English.
+- **TypeScript‑first** — full typings for every public API.
+- **Pure‑JS** — _no native modules_, so no Cocoapods or Gradle edits 🎉.
 
 ---
 
 ## Requirements
 
-| Package                                     | Minimum Version | Notes             |
+| Package                                     | Minimum Version | Notes             |
 | ------------------------------------------- | --------------- | ----------------- |
 | `react`                                     | **18.2.0**      | peer dependency   |
 | `react-native`                              | **0.76.0**      | 0.71+ also works  |
@@ -47,10 +47,18 @@ Embed our 3 step sizing modal into any React Native **or Expo** app so your shop
 
 ## Installation
 
+> **Private registry access**   This package is published under the _readysize_ organization with **restricted access**. You’ll need the personal or CI token we provide before you can install.
+>
+> ```bash
+> # one‑time setup (terminal)
+> npm config set //registry.npmjs.org/:_authToken="YOUR_READYSIZE_TOKEN"
+> # or in CI add an environment variable ⬩  NPM_TOKEN=YOUR_READYSIZE_TOKEN
+> ```
+
 ### Expo / Expo Router
 
 ```bash
-npx expo install mi-react-native-sdk
+npx expo install @readysize/readysizesdk
 # Expo will also install:
 #   @react-native-async-storage/async-storage
 #   @react-native-picker/picker
@@ -69,10 +77,10 @@ Ensure **package.json** has the Expo Router entry point:
 ### Bare React Native
 
 ```bash
-npm install mi-react-native-sdk react@^18.2.0 react-native@^0.76.0 @react-native-async-storage/async-storage@^1.23.1 react-intl@^7.0.1 react-native-svg@^15.11.1 @react-native-picker/picker@^2.11.0
+npm install @readysize/readysizesdk react@^18.2.0 react-native@^0.76.0 @react-native-async-storage/async-storage@^1.23.1 react-intl@^7.0.1 react-native-svg@^15.11.1 @react-native-picker/picker@^2.11.0
 ```
 
-Because the SDK is **100 % JavaScript**, there is nothing to link and **no** `pod install` or `build.gradle` edits required.
+Because the SDK is **100 % JavaScript**, there is nothing to link and **no** `pod install` or `build.gradle` edits required.
 
 ---
 
@@ -166,7 +174,7 @@ const styles = StyleSheet.create({
 
 ```tsx
 // app/modal.tsx – screen that hosts the SDK
-import { ReadysizeAppNative } from "mi-react-native-sdk";
+import { ReadysizeAppNative } from "@readysize/readysizesdk";
 import { useLocalSearchParams, useRouter } from "expo-router";
 
 export default function Modal() {
@@ -196,26 +204,26 @@ export default function Modal() {
 
 ### `<ReadysizeAppNative />` Props
 
-| Prop             | Type                                 | Required | Description                                |     |                   |
-| ---------------- | ------------------------------------ | -------- | ------------------------------------------ | --- | ----------------- |
-| `sku`            | `string`                             | ✅       | Product identifier                         |     |                   |
-| `token`          | `string`                             | ✅       | Public token provided by ReadySize         |     |                   |
-| `cultureDefault` | `string`                             | –        | Locale tag (e.g. `"es-ES"`)                |     |                   |
-| `sizeRanges`     | `string[]`                           | –        | Restrict selectable sizes                  |     |                   |
-| `garmentFitType` | `"number"`                           | -        | "id:1 Regular" id: 2 Ajustado id:3 Holgado | –   | Optional UX tweak |
-| `onCloseApp`     | `() => void`                         | –        | Called when modal closes                   |     |                   |
-| `onAcceptSize`   | `(payload: RecommendedSize) => void` | ✅       | Fires when user accepts size               |     |                   |
+| Prop             | Type                                 | Required | Description                             |     |                   |
+| ---------------- | ------------------------------------ | -------- | --------------------------------------- | --- | ----------------- |
+| `sku`            | `string`                             | ✅       | Product identifier                      |     |                   |
+| `token`          | `string`                             | ✅       | Public token provided by ReadySize      |     |                   |
+| `cultureDefault` | `string`                             | –        | Locale tag (e.g. `"en-US"`)             |     |                   |
+| `sizeRanges`     | `string[]`                           | –        | Restrict selectable sizes               |     |                   |
+| `garmentFitType` | `number    `                         | -        | id:1 Regular id:2 Ajustado id:3 Holgado | –   | Optional UX tweak |
+| `onCloseApp`     | `() => void`                         | –        | Called when modal closes                |     |                   |
+| `onAcceptSize`   | `(payload: RecommendedSize) => void` | ✅       | Fires when user accepts size            |     |                   |
 
 ---
 
 ## Internationalisation (i18n)
 
-The SDK ships its own translations via **react-intl**. Pass `cultureDefault` to override auto detection.
+The SDK ships its own translations via **react-intl**. Pass `cultureDefault` to override auto‑detection.
 
 Need your host UI translated too? Wrap the app with `LanguageProvider`:
 
 ```tsx
-import { LanguageProvider } from "mi-react-native-sdk/context/LanguageContext";
+import { LanguageProvider } from "@readysize/readysizesdk/context/LanguageContext";
 
 <LanguageProvider initialLocale="fr-FR">
   <App />
@@ -257,6 +265,8 @@ const Stack = createStackNavigator();
 
 | Symptom                                             | Fix                                                                  |
 | --------------------------------------------------- | -------------------------------------------------------------------- |
-| **White screen** when modal opens                   | Check peer dependency versions; clear Metro cache (`expo start -c`). |
+| **White screen** when modal opens                   | Check peer‑dependency versions; clear Metro cache (`expo start -c`). |
 | Android build fails with “duplicate class \_Picker” | Remove `@react-native-picker/picker-legacy`.                         |
 | Text appears in the wrong language                  | Verify `cultureDefault`; default is device locale or `en-US`.        |
+
+---
